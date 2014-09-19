@@ -62,5 +62,5 @@ module.exports = function (grunt) {
 
   // tasks
   grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'watch']);
-  grunt.registerTask('nojs', ['sass', 'autoprefixer', 'cssmin']);
+  grunt.registerTask('nojs', ['sass', 'autoprefixer', 'cssmin', 'watch']);
 };
