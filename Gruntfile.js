@@ -15,7 +15,7 @@ module.exports = function (grunt) {
     },
     concat: {
       dist: {
-        src: [ 'static/js/vendor/*.js', 'static/js/main.js'],
+        src: ['static/js/vendor/*.js', 'static/js/main.js'],
         dest: 'static/js/main.built.js'
       }
     },
@@ -45,22 +45,34 @@ module.exports = function (grunt) {
     watch: {
       css: {
         files: ['static/styles/sass/main.scss', 'static/styles/sass/**/*.scss'],
-        tasks: ['sass', 'autoprefixer', 'cssmin']
+        tasks: ['sass'],
+        options: {
+          livereload: true
+        }
       },
       js: {
-        files: ['static/js/main.js', 'static/js/vendor/*.js'],
-        tasks: ['concat', 'uglify']
+        files: ['static/js/main.js'],
+        options: {
+          livereload: true
+        }
+      },
+      html: {
+        files: ['index.html'],
+        options: {
+          livereload: true
+        }
       }
     }
   });
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-processhtml');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // tasks
-  grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify', 'watch']);
-  grunt.registerTask('nojs', ['sass', 'autoprefixer', 'cssmin', 'watch']);
+  grunt.registerTask('dev', ['watch']);
+  grunt.registerTask('pro', ['sass', 'autoprefixer', 'cssmin', 'concat', 'uglify']);
 };

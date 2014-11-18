@@ -29,8 +29,11 @@
   *zoom: 1;
 }
 
-*, *:before, *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
+// natural box layout model to all elements, allows component change
+html {
   box-sizing: border-box;
- }
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
