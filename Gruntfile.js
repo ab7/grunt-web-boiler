@@ -43,14 +43,21 @@ module.exports = function (grunt) {
         files: {
           'dist/index.html': ['index.html']
         }
+      },
+      noJS: {
+        files: {
+          'dist/index.html': ['index.html']
+        }
       }
     },
     sass: {
-      options: {
-        style: 'expanded'
-      },
-      files: {
-        'static/styles/main.css': 'static/styles/sass/main.scss'
+      dist: {
+        options: {
+          style: 'expanded'
+        },
+        files: {
+          'static/styles/main.css': 'static/styles/sass/main.scss'
+        }
       }
     },
     uglify : {
@@ -69,7 +76,7 @@ module.exports = function (grunt) {
         }
       },
       js: {
-        files: ['static/js/main.js'],
+        files: ['static/js/main.js', 'static/js/modules/*.js'],
         options: {
           livereload: true
         }
@@ -97,19 +104,24 @@ module.exports = function (grunt) {
     jsFile = grunt.file.read('dist/main.min.js');
     if (jsFile === "") {
       grunt.file.delete('dist/main.min.js');
+      grunt.task.run('processhtml:noJS');
+    } else {
+      grunt.task.run('processhtml:dist');
     }
   });
 
   // main tasks
-  grunt.registerTask('dev', ['watch']);
+  grunt.registerTask('dev', [
+    'sass',
+    'watch'
+  ]);
   grunt.registerTask('pro', [
     'sass',
-    'autoprefixer',
     'concat',
+    'autoprefixer',
     'cssmin',
     'uglify',
     'copy',
-    'processhtml',
     'checkJS'
   ]);
 };

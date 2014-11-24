@@ -64,4 +64,4 @@ This is a basic frontend boiler I use when starting new projects. It features [S
 * https://github.com/dciccale/grunt-processhtml
 
 #### CheckJS
-* Custom task I wrote to check and delete final js file if empty.
+* Custom task I wrote to check and delete final js file and remove script element from index.html if the file is empty.
