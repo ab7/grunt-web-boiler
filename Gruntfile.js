@@ -9,18 +9,18 @@ module.exports = function (grunt) {
         cascade: false
       },
       single_file: {
-        src: 'static/styles/main.css',
-        dest: 'dist/main.min.css'
+        src: 'dist/static/main.min.css',
+        dest: 'dist/static/main.min.css'
       }
     },
     concat: {
       js: {
         src: ['static/js/modules/*.js', 'static/js/main.js'],
-        dest: 'dist/main.min.js'
+        dest: 'dist/static/main.min.js'
       },
       css: {
         src: ['static/styles/normalize.css', 'static/styles/main.css'],
-        dest: 'dist/main.min.css'
+        dest: 'dist/static/main.min.css'
       }
     },
     copy: {
@@ -28,14 +28,14 @@ module.exports = function (grunt) {
         expand: true,
         flatten: true,
         src: 'static/img/*',
-        dest: 'dist/img',
+        dest: 'dist/static/img',
         filter: 'isFile'
       }
     },
     cssmin : {
       css: {
-        src: 'dist/main.min.css',
-        dest: 'dist/main.min.css'
+        src: 'dist/static/main.min.css',
+        dest: 'dist/static/main.min.css'
       }
     },
     processhtml: {
@@ -63,7 +63,7 @@ module.exports = function (grunt) {
     uglify : {
       my_target: {
         files: {
-          'dist/main.min.js' : ['dist/main.min.js']
+          'dist/static/main.min.js' : ['dist/static/main.min.js']
         }
       }
     },
@@ -101,9 +101,9 @@ module.exports = function (grunt) {
   // custom tasks
   grunt.registerTask('checkJS', function () {
     var jsFile;
-    jsFile = grunt.file.read('dist/main.min.js');
+    jsFile = grunt.file.read('dist/static/main.min.js');
     if (jsFile === "") {
-      grunt.file.delete('dist/main.min.js');
+      grunt.file.delete('dist/static/main.min.js');
       grunt.task.run('processhtml:noJS');
     } else {
       grunt.task.run('processhtml:dist');
